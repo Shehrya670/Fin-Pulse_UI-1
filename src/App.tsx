@@ -25,6 +25,7 @@ import AuditTrail from "@/pages/modules/AuditTrail";
 import Reports from "@/pages/modules/Reports";
 import Notifications from "@/pages/modules/Notifications";
 import NotFound from "@/pages/NotFound";
+import Landing from '@/pages/Landing';
 
 const queryClient = new QueryClient();
 
@@ -39,31 +40,44 @@ const AppRoutes = () => {
   if (isAuthenticated && !onboardingComplete) {
     return <Routes><Route path="*" element={<Onboarding />} /></Routes>;
   }
+  if (isAuthenticated) {
+    return (
+      <Routes>
+        <Route path="/login" element={<Navigate to="/dashboard" />} />
+        <Route path="/signup" element={<Navigate to="/dashboard" />} />
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
+          <Route index element={<Navigate to="/dashboard" />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="user-profile" element={<UserProfile />} />
+          <Route path="business-setup" element={<BusinessSetup />} />
+          <Route path="vendors" element={<VendorManagement />} />
+          <Route path="documents" element={<DocumentUpload />} />
+          <Route path="transactions" element={<TransactionManagement />} />
+          <Route path="bills" element={<BillsInvoices />} />
+          <Route path="bank-accounts" element={<BankAccountManagement />} />
+          <Route path="reconciliation" element={<Reconciliation />} />
+          <Route path="ledger" element={<GeneralLedger />} />
+          <Route path="cash-flow" element={<CashFlowManagement />} />
+          <Route path="expenses" element={<ExpenseTracking />} />
+          <Route path="agent" element={<AgentCentre />} />
+          <Route path="audit" element={<AuditTrail />} />
+          <Route path="reports" element={<Reports />} />
+          <Route path="notifications" element={<Notifications />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    );
+  }
 
+  // Unauthenticated routes: Landing is the first page at '/'
   return (
     <Routes>
-      <Route path="/login" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />} />
-      <Route path="/signup" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Signup />} />
+      <Route path="/" element={<Landing />} />
+      <Route path="/landing" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/onboarding" element={<Onboarding />} />
-      <Route path="/" element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
-        <Route index element={<Navigate to="/dashboard" />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="user-profile" element={<UserProfile />} />
-        <Route path="business-setup" element={<BusinessSetup />} />
-        <Route path="vendors" element={<VendorManagement />} />
-        <Route path="documents" element={<DocumentUpload />} />
-        <Route path="transactions" element={<TransactionManagement />} />
-        <Route path="bills" element={<BillsInvoices />} />
-        <Route path="bank-accounts" element={<BankAccountManagement />} />
-        <Route path="reconciliation" element={<Reconciliation />} />
-        <Route path="ledger" element={<GeneralLedger />} />
-        <Route path="cash-flow" element={<CashFlowManagement />} />
-        <Route path="expenses" element={<ExpenseTracking />} />
-        <Route path="agent" element={<AgentCentre />} />
-        <Route path="audit" element={<AuditTrail />} />
-        <Route path="reports" element={<Reports />} />
-        <Route path="notifications" element={<Notifications />} />
-      </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

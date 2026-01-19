@@ -54,19 +54,19 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
   return (
     <aside
       className={cn(
-        'fixed left-0 top-0 z-40 h-screen border-r-2 border-foreground bg-background transition-all duration-300',
+        'fixed left-0 top-0 z-40 h-screen border-r-2 border-blue-200 bg-gradient-to-b from-blue-600 to-indigo-600 text-white transition-all duration-300',
         isCollapsed ? 'w-16' : 'w-64'
       )}
     >
-      <div className="flex h-14 items-center justify-between border-b-2 border-foreground px-4">
+      <div className="flex h-14 items-center justify-between border-b border-blue-500 px-4">
         {!isCollapsed && (
-          <span className="text-xl font-bold tracking-tight">FIN-PULSE</span>
+          <span className="text-xl font-bold tracking-tight text-white">FIN-PULSE</span>
         )}
         <Button
           variant="ghost"
           size="icon"
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="ml-auto"
+          className="ml-auto text-white hover:bg-blue-500"
         >
           {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </Button>
@@ -81,10 +81,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
                 key={module.id}
                 to={module.path}
                 className={cn(
-                  'flex items-center gap-3 px-3 py-2 text-sm font-medium transition-colors border-2',
+                  'flex items-center gap-3 px-3 py-2 text-sm font-medium transition-all rounded-lg',
                   isActive
-                    ? 'bg-foreground text-background border-foreground'
-                    : 'border-transparent hover:bg-secondary hover:border-foreground'
+                    ? 'bg-white/20 text-white border-l-4 border-white'
+                    : 'text-blue-100 hover:bg-white/10 hover:text-white'
                 )}
               >
                 <Icon size={18} />
