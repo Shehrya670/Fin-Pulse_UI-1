@@ -27,13 +27,16 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md border-2 border-foreground shadow-md">
-        <CardHeader className="text-center">
-          <CardTitle className="text-3xl font-bold tracking-tight">FIN-PULSE</CardTitle>
-          <CardDescription className="text-lg">Agentic Smart Accounting System</CardDescription>
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-50 p-4">
+      <Card className="w-full max-w-md border-0 shadow-xl rounded-xl overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white text-center">
+          <div className="flex flex-col items-center">
+            <CardTitle className="text-3xl font-bold tracking-tight">FIN-PULSE</CardTitle>
+            <CardDescription className="text-blue-100">Agentic Smart Accounting System</CardDescription>
+            <Link to="/" className="text-sm text-blue-200 mt-2 hover:text-white transition-colors">Back to homepage</Link>
+          </div>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* FR-1.2.1: Enter Email */}
             <div className="space-y-2">
@@ -45,7 +48,7 @@ const Login: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="border-2 border-foreground"
+                className="border-2 border-gray-200 bg-gradient-to-r from-slate-50 to-blue-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg h-12"
               />
             </div>
 
@@ -59,7 +62,7 @@ const Login: React.FC = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="border-2 border-foreground"
+                className="border-2 border-gray-200 bg-gradient-to-r from-slate-50 to-blue-50 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 rounded-lg h-12"
               />
             </div>
 
@@ -81,14 +84,14 @@ const Login: React.FC = () => {
               </Link>
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold h-12 hover:from-blue-700 hover:to-indigo-700 transition-all" disabled={loading}>
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
 
             <Separator className="my-4" />
 
             {/* FR-1.3.1: Google Sign In */}
-            <Button type="button" variant="outline" className="w-full border-2 border-foreground">
+            <Button type="button" variant="outline" className="w-full border-2 border-gray-200 hover:bg-slate-50">
               <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                 <path
                   d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -110,9 +113,9 @@ const Login: React.FC = () => {
               Sign in with Google
             </Button>
 
-            <p className="text-center text-sm text-muted-foreground">
+            <p className="text-center text-sm text-slate-600">
               Don't have an account?{' '}
-              <Link to="/signup" className="underline hover:text-foreground">
+              <Link to="/signup" className="text-blue-600 underline hover:text-indigo-600">
                 Sign up
               </Link>
             </p>

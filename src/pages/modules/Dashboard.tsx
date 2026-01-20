@@ -28,12 +28,12 @@ const Dashboard: React.FC = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard & Analytics</h1>
-          <p className="text-muted-foreground">Module 11: Overview of your financial health</p>
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900">Dashboard & Analytics</h1>
+          <p className="text-slate-600">Module 11: Overview of your financial health</p>
         </div>
         <div className="flex gap-2">
           <Select value={dateRange} onValueChange={setDateRange}>
-            <SelectTrigger className="w-48 border-2 border-foreground">
+            <SelectTrigger className="w-48 border-2 border-slate-200 bg-white hover:border-blue-300">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -42,42 +42,46 @@ const Dashboard: React.FC = () => {
               <SelectItem value="fiscal_year">This Fiscal Year</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline"><Download size={18} className="mr-2" />Export</Button>
+          <Button className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700"><Download size={18} className="mr-2" />Export</Button>
         </div>
       </div>
 
       {/* Key Metrics */}
       <div className="grid grid-cols-4 gap-4">
-        <Card className="border-2 border-foreground">
+        <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all">
           <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">Cash Balance</p>
-            <p className="text-2xl font-bold">PKR {currentBalance.toLocaleString()}</p>
+            <p className="text-sm text-slate-600 font-medium">Cash Balance</p>
+            <p className="text-2xl font-bold text-slate-900 mt-2">PKR {currentBalance.toLocaleString()}</p>
+            <div className="mt-3 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full"></div>
           </CardContent>
         </Card>
-        <Card className="border-2 border-foreground">
+        <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all">
           <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">Net Liquidity</p>
-            <p className="text-2xl font-bold text-chart-2">PKR {netLiquidity.toLocaleString()}</p>
+            <p className="text-sm text-slate-600 font-medium">Net Liquidity</p>
+            <p className="text-2xl font-bold text-green-600 mt-2">PKR {netLiquidity.toLocaleString()}</p>
+            <div className="mt-3 w-full h-1 bg-gradient-to-r from-green-400 to-green-600 rounded-full"></div>
           </CardContent>
         </Card>
-        <Card className="border-2 border-foreground">
+        <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all">
           <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">Total Inflows</p>
-            <p className="text-2xl font-bold text-chart-2">+PKR {totalInflow.toLocaleString()}</p>
+            <p className="text-sm text-slate-600 font-medium">Total Inflows</p>
+            <p className="text-2xl font-bold text-emerald-600 mt-2">+PKR {totalInflow.toLocaleString()}</p>
+            <div className="mt-3 w-full h-1 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full"></div>
           </CardContent>
         </Card>
-        <Card className="border-2 border-foreground">
+        <Card className="border-0 shadow-lg bg-white hover:shadow-xl transition-all">
           <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">Total Outflows</p>
-            <p className="text-2xl font-bold text-destructive">-PKR {totalOutflow.toLocaleString()}</p>
+            <p className="text-sm text-slate-600 font-medium">Total Outflows</p>
+            <p className="text-2xl font-bold text-red-600 mt-2">-PKR {totalOutflow.toLocaleString()}</p>
+            <div className="mt-3 w-full h-1 bg-gradient-to-r from-red-400 to-red-600 rounded-full"></div>
           </CardContent>
         </Card>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         {/* Cash Flow Chart */}
-        <Card className="border-2 border-foreground">
-          <CardHeader><CardTitle>Cash Flow Trend</CardTitle></CardHeader>
+        <Card className="border-0 shadow-lg">
+          <CardHeader><CardTitle className="text-slate-900">Cash Flow Trend</CardTitle></CardHeader>
           <CardContent>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -96,8 +100,8 @@ const Dashboard: React.FC = () => {
         </Card>
 
         {/* Expense Breakdown */}
-        <Card className="border-2 border-foreground">
-          <CardHeader><CardTitle>Expense Breakdown</CardTitle></CardHeader>
+        <Card className="border-0 shadow-lg">
+          <CardHeader><CardTitle className="text-slate-900">Expense Breakdown</CardTitle></CardHeader>
           <CardContent>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -117,34 +121,34 @@ const Dashboard: React.FC = () => {
 
       {/* Top Vendors & Budget */}
       <div className="grid grid-cols-2 gap-4">
-        <Card className="border-2 border-foreground">
-          <CardHeader><CardTitle>Top 5 Vendors by Spend</CardTitle></CardHeader>
+        <Card className="border-0 shadow-lg">
+          <CardHeader><CardTitle className="text-slate-900">Top 5 Vendors by Spend</CardTitle></CardHeader>
           <CardContent>
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={topVendors} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
                   <XAxis type="number" />
                   <YAxis dataKey="name" type="category" width={100} />
                   <Tooltip formatter={(value: number) => `PKR ${value.toLocaleString()}`} />
-                  <Bar dataKey="spend" fill="hsl(0, 0%, 0%)" />
+                  <Bar dataKey="spend" fill="url(#colorGradient)" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-2 border-foreground">
-          <CardHeader><CardTitle>Budget vs Actual</CardTitle></CardHeader>
+        <Card className="border-0 shadow-lg">
+          <CardHeader><CardTitle className="text-slate-900">Budget vs Actual</CardTitle></CardHeader>
           <CardContent className="space-y-4">
             <div className="flex justify-between text-sm">
-              <span>Monthly Budget Target</span>
-              <span className="font-bold">PKR {budgetTarget.toLocaleString()}</span>
+              <span className="text-slate-600">Monthly Budget Target</span>
+              <span className="font-bold text-slate-900">PKR {budgetTarget.toLocaleString()}</span>
             </div>
-            <Progress value={(actualSpend / budgetTarget) * 100} className="h-4" />
+            <Progress value={(actualSpend / budgetTarget) * 100} className="h-2 bg-slate-200" />
             <div className="flex justify-between text-sm">
-              <span>Actual Spend: PKR {actualSpend.toLocaleString()}</span>
-              <Badge variant={actualSpend > budgetTarget ? 'destructive' : 'default'} className={actualSpend <= budgetTarget ? 'bg-chart-2' : ''}>
+              <span className="text-slate-600">Actual Spend: PKR {actualSpend.toLocaleString()}</span>
+              <Badge className={actualSpend <= budgetTarget ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white' : 'bg-gradient-to-r from-red-500 to-rose-500 text-white'}>
                 {actualSpend > budgetTarget ? 'Over Budget' : 'Within Budget'}
               </Badge>
             </div>
